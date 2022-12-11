@@ -9,5 +9,8 @@ jc.o: jc.c token.h
 token.o: token.c token.h
 	gcc -g -Wall -std=c11 -c token.c
 
+print_asm.o: print_asm.c print_asm.h token.h
+	gcc -g -Wall -std=c11 -c print_asm.c
+
 clean:
 	rm -f *.o *~ jc

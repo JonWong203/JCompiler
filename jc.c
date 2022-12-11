@@ -21,6 +21,11 @@ int main(int argc, char* argv[]){
 	
 	FILE* asm_file = fopen(asm_name, "w");
 	FILE* txt_file = fopen(txt_name, "w");
+	if (JFile == NULL || asm_file == NULL || txt_file == NULL){
+		printf("Error opening file");
+		// exit(EXIT_FAILURE);
+		return 1;
+	}
 	
 	token currToken;
 	//next_token(JFile, &currToken);
@@ -28,9 +33,10 @@ int main(int argc, char* argv[]){
 		// Generate ASM code for token
 		// printf("jc.c reached, in nextToken while loop");
 		// printf("%d", currToken.literal_value);
+		// print_token(stdout, currToken);
 	}
 	fclose(JFile);
 	fclose(asm_file);
 	fclose(txt_file);
-	return 1;
+	return 0;
 }
