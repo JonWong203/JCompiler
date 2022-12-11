@@ -33,7 +33,7 @@ int main(int argc, char* argv[]){
 		// Generate ASM code for token
 		// printf("jc.c reached, in nextToken while loop");
 		// printf("%d", currToken.literal_value);
-		// print_token(stdout, currToken);
+		 print_token(stdout, currToken);
 	}
 	fclose(JFile);
 	fclose(asm_file);

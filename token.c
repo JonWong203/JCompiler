@@ -38,6 +38,7 @@ bool next_token(FILE *j_file, token *output){
       	// Return false if there are no more tokens to read
       	return false;
     } else if (strchr(value, ';') == value){
+		// if 1st element is ;, read to end of line and call next_token again
 		// handle comments
 		int c;
 		c = fgetc(j_file);
@@ -52,13 +53,6 @@ bool next_token(FILE *j_file, token *output){
       	printf("%s\n", value);
       	return true;
 	}
-	// } else {
-	// 	int c;
-  	// 	while ((c = fgetc(j_file)) != '\n' && c != EOF) {
-  	// 		// loop through to end of line
-  	// 	}
-  	// 	return next_token(j_file, output);
-	// }
 }
 
 
@@ -71,6 +65,7 @@ void valueToToken(token *outputToken, char value[]){
 		sscanf(value, "%X", &num);
 		outputToken->type = LITERAL;
 		outputToken->literal_value = num;
+		// decimals
 	} else if (sscanf(value, "%d", &num) == 1){
 		outputToken->type = LITERAL;
 		outputToken->literal_value = num;
@@ -93,19 +88,7 @@ void valueToToken(token *outputToken, char value[]){
 	} else if (strcmp(value, "not") == 0 ) {
 		outputToken->type = NOT;
 	}
-	// Functions
-	 else if (strcmp(value, "defun") == 0){
-		outputToken->type = DEFUN;
-		strcpy(outputToken->str, value);
-	} else if (strcmp(value, "ident") == 0){
-		// IDENT
-		outputToken->type = IDENT;
-		strcpy(outputToken->str, value);
-	}
-	 else if (strcmp(value, "return") == 0){
-		outputToken->type = RETURN;
-		strcpy(outputToken->str, value);
-	}
+	
 	// Control Statements
 	 else if (strcmp(value, "if") == 0){
 		outputToken->type = IF;
@@ -143,29 +126,45 @@ void valueToToken(token *outputToken, char value[]){
 	// Comparison Operators
 	 else if (strcmp(value, "lt") == 0){
 		outputToken->type = LT;
-		strcpy(outputToken->str, value);
 	} 
 	else if (strcmp(value, "le") == 0){
 		outputToken->type = LE;
-		strcpy(outputToken->str, value);
 	} 
 	else if (strcmp(value, "eq") == 0){
 		outputToken->type = EQ;
-		strcpy(outputToken->str, value);
 	} 
 	else if (strcmp(value, "ge") == 0){
 		outputToken->type = GE;
-		strcpy(outputToken->str, value);
 	} 
 	else if (strcmp(value, "gt") == 0){
 		outputToken->type = GT;
+	} 
+	
+	// Functions
+	 else if (strcmp(value, "defun") == 0){
+		outputToken->type = DEFUN;
+	} else if (strcmp(value, "return") == 0){
+		outputToken->type = RETURN;
+	} else if (sscanf(value, "arg%d", &num) == 1){
+		outputToken->type = ARG;
+		outputToken->arg_no = num;
 		strcpy(outputToken->str, value);
 	} else {
-		outputToken->type = BAD_TOKEN;
+		//IDENT
+		bool isIdent = true;
+		for (int i = 0; i < strlen(value); i++){
+			if (!isalnum(value[i]) && value[i] != '_'){
+				isIdent = false;
+				break;
+			}
+		}
+		if (isIdent){
+			outputToken->type = IDENT;
+			strcpy(outputToken->str, value);
+		} else {
+			outputToken->type = BAD_TOKEN;
+		}
 	}
-	// printf("%d", num);
-	// ctype.h functions isdigit(int a) use it?
-	// return outputToken;
 }
 
 
@@ -225,8 +224,10 @@ void print_token (FILE* f, token to_print){
 		fprintf(f, ">=\n");
 	} else if (to_print.type == GT) {
 		fprintf(f, ">\n");
+	} else if (to_print.type == ARG) {
+		fprintf(f, "ARG %s\n", to_print.str);
 	} else if (to_print.type == DEFUN) {
-		fprintf(f, "OOp %s\n", to_print.str);
+		fprintf(f, "DEFUN \n");
 	} else if (to_print.type == RETURN) {
 		fprintf(f, "%s", "RETURN\n");
 	} else if (to_print.type == IDENT) {
