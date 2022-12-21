@@ -31,27 +31,27 @@ int line_number = 0;
 // - false if a token could not be read due to either hitting the end of file
 //   or some unrecoverable error
 bool next_token(FILE *j_file, token *output){
-	// open file first?
-	// what type should value be?
 	char value[250];
-	if (fscanf(j_file, "%s", value) == 0 || feof(j_file)) {
-      	// Return false if there are no more tokens to read
-      	return false;
-    } else if (strchr(value, ';') == value){
-		// if 1st element is ;, read to end of line and call next_token again
-		// handle comments
-		int c;
-		c = fgetc(j_file);
-  		while (c != '\n' && c != EOF) {
-  			// loop through to end of line
+	if ( feof(j_file) ) {
+		return false;
+	} else if ( fscanf(j_file, "%s", value) == 1 ) {
+    	if (strchr(value, ';') == value){
+			// if 1st element is ;, read to end of line and call next_token again
+			// handle comments
+			int c;
 			c = fgetc(j_file);
-  		}
-  		return next_token(j_file, output);
-	}
-	else  {
-		valueToToken(output, value);
-      	printf("%s\n", value);
-      	return true;
+			while (c != '\n' && c != EOF) {
+				// loop through to end of line
+				c = fgetc(j_file);
+			}
+			return next_token(j_file, output);
+		} else  {
+			valueToToken(output, value);
+			printf("%s\n", value);
+			return true;
+		}
+	} else {
+		return false;
 	}
 }
 
@@ -205,15 +205,17 @@ void print_token (FILE* f, token to_print){
 	} else if (to_print.type == ROT) {
 		fprintf(f, "ROT\n");
 	} else if (to_print.type == IF) {
-		fprintf(f, "if\n");
+		fprintf(f, "IF\n");
 	} else if (to_print.type == WHILE) {
-		fprintf(f, "while\n");
+		fprintf(f, "WHILE\n");
+	} else if (to_print.type == ENDWHILE) {
+		fprintf(f, "ENDWHILE\n");
 	} else if (to_print.type == ENDIF) {
 		fprintf(f, "endif\n");
 	} else if (to_print.type == SWAP) {
-		fprintf(f, "endwhile\n");
+		fprintf(f, "SWAP\n");
 	} else if (to_print.type == ELSE) {
-		fprintf(f, "else\n");
+		fprintf(f, "ELSE\n");
 	} else if (to_print.type == LT) {
 		fprintf(f, "<\n");
 	} else if (to_print.type == LE) {
@@ -233,6 +235,6 @@ void print_token (FILE* f, token to_print){
 	} else if (to_print.type == IDENT) {
 		fprintf(f, "IDENT %s\n", to_print.str);
 	} else if (to_print.type == BAD_TOKEN){
-		fprintf(f, "Bad Token\n");
+		fprintf(f, "BAD TOKEN\n");
 	}
 }

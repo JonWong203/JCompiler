@@ -1,0 +1,159 @@
+;; ident by itself, not after a defunJSR fact
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;;handling argn
+LDR R0, R5, #3
+ADD R6, R6, #-1
+STR R0, R6, #0
+LDR R0, R6, #0
+ADD R6, R6, #-1
+STR R0, R6, #0
+CONST R0, #1
+ADD R6, R6, #-1
+STR R0, R6, #0
+LDR R0, R6, #0
+ADD R6, R6, #1
+LDR R1, R6, #0
+ADD R6, R6, #1
+CMP R0, R1
+BRzp GE_TRUE1
+BRn GE_FALSE1
+GE_TRUE1
+CONST R0, #1
+ADD R6, R6, #-1
+STR R0, R6, #0
+JMP END_CMP1
+GE_FALSE1
+CONST R0, #0
+ADD R6, R6, #-1
+STR R0, R6, #0
+END_CMP1
+;; GE finished
+
+;; writing if statement
+LDR R0, R6, #0
+ADD R6, R6, #1
+CMPI R0, #0
+BRnp ELSE2
+CONST R0, #1
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; writing else statementJMP END_IF2
+ELSE2
+LDR R0, R6, #0
+ADD R6, R6, #-1
+STR R0, R6, #0
+CONST R0, #1
+ADD R6, R6, #-1
+STR R0, R6, #0
+LDR R0, R6, #0
+ADD R6, R6, #1
+LDR R1, R6, #0
+STR R0, R6, #0
+ADD R6, R6, #-1
+STR R1, R6, #0
+LDR R0, R6, #0
+ADD R6, R6, #1
+LDR R1, R6, #0
+SUB R0, R0, R1
+STR R0, R6, #0
+;; ident by itself, not after a defunJSR fact
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+LDR R0, R6, #0
+ADD R6, R6, #1
+LDR R1, R6, #0
+STR R0, R6, #0
+ADD R6, R6, #-1
+STR R1, R6, #0
+CONST R0, #0
+STR R0, R6, #0
+ADD R6, R6, #1
+LDR R0, R6, #0
+ADD R6, R6, #1
+LDR R1, R6, #0
+MUL R0, R0, R1
+STR R0, R6, #0
+;; writing endif
+END_IF2
+;; ident by itself, not after a defunJSR main
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+CONST R0, #4
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; ident by itself, not after a defunJSR fact
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defunJSR printnum
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defunJSR endl
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+CONST R0, #5
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; ident by itself, not after a defunJSR fact
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defunJSR printnum
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defunJSR endl
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+CONST R0, #6
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; ident by itself, not after a defunJSR fact
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defunJSR printnum
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defunJSR endl
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+CONST R0, #7
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; ident by itself, not after a defunJSR fact
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defunJSR printnum
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defunJSR endl
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+

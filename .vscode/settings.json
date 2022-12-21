@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "print_asm.h": "c",
+        "*.ds_store": "c",
+        "deque.h": "c"
     }
 }
