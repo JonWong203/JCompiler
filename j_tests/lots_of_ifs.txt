@@ -1,0 +1,193 @@
+;; ident by itself, not after a defun
+JSR testIfs
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;;handling argn
+LDR R0, R5, #3
+ADD R6, R6, #-1
+STR R0, R6, #0
+LDR R0, R6, #0
+ADD R6, R6, #-1
+STR R0, R6, #0
+CONST R0, #10
+ADD R6, R6, #-1
+STR R0, R6, #0
+LDR R0, R6, #0
+ADD R6, R6, #1
+LDR R1, R6, #0
+ADD R6, R6, #1
+CMP R0, R1
+BRp GT_TRUE1
+BRnz GT_FALSE1
+GT_TRUE1
+CONST R0, #1
+ADD R6, R6, #-1
+STR R0, R6, #0
+JMP END_CMP1
+GT_FALSE1
+CONST R0, #0
+ADD R6, R6, #-1
+STR R0, R6, #0
+END_CMP1
+;; GT finished
+
+;; writing if statement
+LDR R0, R6, #0
+ADD R6, R6, #1
+CMPI R0, #0
+BRnp ELSE2
+LDR R0, R6, #0
+ADD R6, R6, #-1
+STR R0, R6, #0
+CONST R0, #5
+ADD R6, R6, #-1
+STR R0, R6, #0
+LDR R0, R6, #0
+ADD R6, R6, #1
+LDR R1, R6, #0
+ADD R6, R6, #1
+CMP R0, R1
+BRp GT_TRUE3
+BRnz GT_FALSE3
+GT_TRUE3
+CONST R0, #1
+ADD R6, R6, #-1
+STR R0, R6, #0
+JMP END_CMP3
+GT_FALSE3
+CONST R0, #0
+ADD R6, R6, #-1
+STR R0, R6, #0
+END_CMP3
+;; GT finished
+
+;; writing if statement
+LDR R0, R6, #0
+ADD R6, R6, #1
+CMPI R0, #0
+BRnp ELSE4
+CONST R0, #11
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; writing else statementJMP END_IF4
+ELSE4
+CONST R0, #12
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; writing endif
+END_IF3
+;; writing else statementJMP END_IF2
+ELSE2
+LDR R0, R6, #0
+ADD R6, R6, #-1
+STR R0, R6, #0
+CONST R0, #20
+ADD R6, R6, #-1
+STR R0, R6, #0
+LDR R0, R6, #0
+ADD R6, R6, #1
+LDR R1, R6, #0
+ADD R6, R6, #1
+CMP R0, R1
+BRp GT_TRUE5
+BRnz GT_FALSE5
+GT_TRUE5
+CONST R0, #1
+ADD R6, R6, #-1
+STR R0, R6, #0
+JMP END_CMP5
+GT_FALSE5
+CONST R0, #0
+ADD R6, R6, #-1
+STR R0, R6, #0
+END_CMP5
+;; GT finished
+
+;; writing if statement
+LDR R0, R6, #0
+ADD R6, R6, #1
+CMPI R0, #0
+BRnp ELSE6
+CONST R0, #13
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; writing else statementJMP END_IF6
+ELSE6
+CONST R0, #14
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; writing endif
+END_IF5
+;; writing endif
+END_IF1
+;; ident by itself, not after a defun
+JSR main
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+CONST R0, #8
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; ident by itself, not after a defun
+JSR testIfs
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defun
+JSR printnum
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defun
+JSR endl
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+CONST R0, #4
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; ident by itself, not after a defun
+JSR testIfs
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defun
+JSR printnum
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defun
+JSR endl
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+CONST R0, #45
+ADD R6, R6, #-1
+STR R0, R6, #0
+;; ident by itself, not after a defun
+JSR testIfs
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defun
+JSR printnum
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+
+;; ident by itself, not after a defun
+JSR endl
+ADD R6, R6, #-1
+;; ident by itself, not after a defun
+
+

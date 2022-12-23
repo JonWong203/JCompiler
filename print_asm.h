@@ -22,7 +22,7 @@ void writeBitwise(FILE* file, token* tok);
 
 void writeStackOps(FILE* file, token* tok);
 
-void writeDefun(FILE* file, token* tok);
+void writeDefun(FILE* JFile, FILE* file, token* tok);
 
 void writeIdentCall(FILE* file, token* tok);
 

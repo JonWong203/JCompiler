@@ -1,5 +1,6 @@
 #include "./print_asm.h"
 #include "./deque.h"
+#include "./token.h"
 
 // global variables
 int cmpCount = 0;
@@ -239,36 +240,53 @@ void writeComparison(FILE* file, token* tok){
 	}
 }
 
-void writeDefun(FILE* file, token* defunToken){
+void writeDefun(FILE* JFile, FILE* file, token* defunToken){
 	token identToken;
-	next_token(file, &identToken);
-	if (identToken.type == IDENT){
-		fprintf(file, ".CODE\n");
-		fprintf(file, ".FALIGN\n");
+	// need to malloc or no?
+	next_token(JFile, &identToken);
+	printf("identToken: %s", identToken.str);
+	fprintf(file, ".CODE\n");
+	fprintf(file, ".FALIGN\n");
 
-		fprintf(file, "%s\n", identToken.str);
-		fprintf(file, ";; writing prologue\n");
+	fprintf(file, "%s\n", identToken.str);
+	fprintf(file, ";; writing prologue\n");
 
-		// store return address
-		fprintf(file, "STR R7, R6, #-2\n");
-		// store previous frame pointer
-		fprintf(file, "STR R5, R6, #-3 \n");
-		// new stack pointer
-		fprintf(file, "ADD R6, R6, #-3\n");
-		// new frame pointer
-		fprintf(file, "ADD R5, R6, #0\n");
+	// store return address
+	fprintf(file, "STR R7, R6, #-2\n");
+	// store previous frame pointer
+	fprintf(file, "STR R5, R6, #-3 \n");
+	// new stack pointer
+	fprintf(file, "ADD R6, R6, #-3\n");
+	// new frame pointer
+	fprintf(file, "ADD R5, R6, #0\n");
 
-		fprintf(file, ";; end of prologue\n\n\n");
-	}
+	fprintf(file, ";; end of prologue\n\n\n");
+	// if (identToken.type == IDENT){
+	// 	fprintf(file, ".CODE\n");
+	// 	fprintf(file, ".FALIGN\n");
+
+	// 	fprintf(file, "%s\n", identToken.str);
+	// 	fprintf(file, ";; writing prologue\n");
+
+	// 	// store return address
+	// 	fprintf(file, "STR R7, R6, #-2\n");
+	// 	// store previous frame pointer
+	// 	fprintf(file, "STR R5, R6, #-3 \n");
+	// 	// new stack pointer
+	// 	fprintf(file, "ADD R6, R6, #-3\n");
+	// 	// new frame pointer
+	// 	fprintf(file, "ADD R5, R6, #0\n");
+
+	// 	fprintf(file, ";; end of prologue\n\n\n");
+	// }
 }
 
 void writeIdentCall(FILE* file, token* token){
-	fprintf(file, ";; ident by itself, not after a defun");
+	fprintf(file, ";; ident by itself, not after a defun\n");
 	// jump to ident function's label
 	fprintf(file, "JSR %s\n", token->str);
 	// increase stack pointer??
 	fprintf(file, "ADD R6, R6, #-1\n");
-		
 	fprintf(file, ";; ident by itself, not after a defun\n\n\n");
 }
 
@@ -313,7 +331,7 @@ void writeIf(FILE* file, token* token){
 	} else {
 		fprintf(file, ";; writing endif\n");
 		int currCount;
-		Deque_Pop_Back(if_stack, &currCount);
+		Deque_Pop_Front(if_stack, &currCount);
 		if (!has_else){
 			fprintf(file, "ELSE%d\n", ifCount);
 		}
